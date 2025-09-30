@@ -68,9 +68,9 @@ body::before {
   top: 50%; left: 50%;
   transform: translate(-50%, -50%);
   width: 80vw;
-  max-width: 320px;
-  height: 50vw;
-  max-height: 200px;
+  max-width: 400px;
+  height: 45vw;
+  max-height: 250px;
   transform-style: preserve-3d;
   z-index: 10;
 }
@@ -261,6 +261,11 @@ footer {
 
 /* --- RESPONSIVIDADE --- */
 @media (max-width: 480px) {
+  #cartaContainer {
+    width: 90vw;
+    height: 55vw;
+    max-height: 220px;
+  }
   header h1 { font-size: 1.5em; padding: 6px 8px; }
   header h1 span:nth-child(2) { font-size: 1.2em; }
   header p { font-size: 0.85em; padding: 5px 6px; }
