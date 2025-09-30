@@ -294,4 +294,69 @@ footer {
 
   <div id="contador">
     <div class="tempo"><h2 id="dias">0</h2><span>Dias</span></div>
-    <div class
+    <div class="tempo"><h2 id="horas">0</h2><span>Horas</span></div>
+    <div class="tempo"><h2 id="minutos">0</h2><span>Min</span></div>
+    <div class="tempo"><h2 id="segundos">0</h2><span>Seg</span></div>
+  </div>
+</header>
+
+<section class="info">
+<h2>Você é nosso convidado especial!</h2>
+<p><strong>Data:</strong> 23/01</p>
+<p><strong>Horário:</strong> 21h até 4h</p>
+<div class="btns">
+  <!-- WhatsApp -->
+  <a href="https://wa.me/5551993223902" target="_blank">
+    <img src="https://img.cdndsgni.com/preview/10000404.jpg" alt="WhatsApp">
+    Confirmar Presença
+  </a>
+  <!-- Google Maps -->
+  <a href="https://maps.app.goo.gl/YbAJr3sXhotr2sFw5" target="_blank">
+    <img src="https://cdn-icons-png.flaticon.com/256/2642/2642502.png" alt="Maps">
+    Como Chegar
+  </a>
+</div>
+</section>
+
+<footer>
+✨ Feito com carinho para a Isadora ✨
+</footer>
+</div>
+
+<script>
+// Contador
+const dataEvento = new Date("January 23, 2026 21:00:00").getTime();
+const atualizarContador = () => {
+  const agora = new Date().getTime();
+  const distancia = dataEvento - agora;
+  if(distancia < 0) return;
+  const dias = Math.floor(distancia / (1000*60*60*24));
+  const horas = Math.floor((distancia % (1000*60*60*24)) / (1000*60*60));
+  const minutos = Math.floor((distancia % (1000*60*60)) / (1000*60));
+  const segundos = Math.floor((distancia % (1000*60)) / 1000);
+  document.getElementById("dias").textContent = dias;
+  document.getElementById("horas").textContent = horas;
+  document.getElementById("minutos").textContent = minutos;
+  document.getElementById("segundos").textContent = segundos;
+};
+setInterval(atualizarContador, 1000);
+
+// Revela o convite após animação da carta
+setTimeout(() => {
+  document.getElementById('cartaContainer').style.display = 'none';
+  document.getElementById('conteudo').style.opacity = 1;
+}, 5000);
+
+// Gera partículas mágicas
+for(let i=0;i<30;i++){
+  const p=document.createElement('div');
+  p.classList.add('particle');
+  p.style.left=Math.random()*100+'vw';
+  p.style.top=Math.random()*100+'vh';
+  p.style.animationDuration=(3+Math.random()*3)+'s';
+  document.body.appendChild(p);
+}
+</script>
+
+</body>
+</html>
