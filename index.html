@@ -73,7 +73,7 @@ body::before {
   position: absolute;
   width: 50%;
   height: 100%;
-  background: linear-gradient(135deg, #FFD700, #E6C200); /* dourado estilo Bela e a Fera */
+  background: linear-gradient(135deg, #FFD700, #E6C200);
   border: 3px solid #B8860B;
   border-radius: 10px;
   box-shadow: 0 0 40px rgba(0,0,0,0.5);
@@ -92,7 +92,6 @@ body::before {
   transform-origin: right; 
 }
 
-/* Animação de abertura em duas partes */
 @keyframes abrirCartaEsquerda {
   0% { transform: rotateY(0deg); }
   100% { transform: rotateY(-180deg); opacity:0; }
@@ -219,6 +218,65 @@ header p {
 .btns a:hover { transform: scale(1.05); box-shadow:0 6px 16px rgba(0,0,0,0.5); }
 .btns img { width:20px; height:20px; margin-right:6px; vertical-align:middle; }
 
+/* --- BOTÃO LISTA PRESENTES --- */
+#lista-btn {
+  background: #f5d76e;
+  color: #0d1b4c;
+  padding: 10px 16px;
+  border-radius: 25px;
+  font-weight: 600;
+  margin-top: 15px;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+#lista-btn:hover { transform: scale(1.05); box-shadow:0 6px 16px rgba(0,0,0,0.5); }
+
+/* --- MODAL LISTA PRESENTES --- */
+#lista-modal {
+  display: none;
+  position: fixed;
+  top:0; left:0;
+  width: 100vw; height:100vh;
+  background: rgba(0,0,0,0.7);
+  z-index: 20;
+  justify-content: center;
+  align-items: center;
+}
+
+#lista-modal .modal-content {
+  background: rgba(255, 223, 0, 0.95);
+  padding: 20px 25px;
+  border-radius: 15px;
+  border: 3px solid #B8860B;
+  max-width: 90%;
+  max-height: 80%;
+  overflow-y: auto;
+  text-align: left;
+  color: #3e2f0b;
+}
+
+#lista-modal h2 {
+  margin-bottom: 12px;
+  font-family: 'Great Vibes', cursive;
+  font-size: 2em;
+  text-align: center;
+}
+
+#lista-modal ul { list-style: disc; padding-left: 20px; }
+#lista-modal li { margin: 8px 0; }
+
+/* Fechar modal */
+#lista-modal .fechar {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 1.5em;
+  font-weight: bold;
+  cursor: pointer;
+  color: #3e2f0b;
+}
+
 /* --- RODAPÉ --- */
 footer {
   margin:20px 0 20px;
@@ -284,9 +342,29 @@ footer {
     <img src="https://cdn-icons-png.flaticon.com/256/2642/2642502.png" alt="Maps">Como Chegar
   </a>
 </div>
+
+<!-- Botão para lista de presentes -->
+<div id="lista-btn">Ver Lista de Presentes</div>
 </section>
 
 <footer>✨ Feito com carinho para a Isadora ✨</footer>
+</div>
+
+<!-- MODAL LISTA PRESENTES -->
+<div id="lista-modal">
+  <div class="modal-content">
+    <span class="fechar">&times;</span>
+    <h2>Lista de Presentes</h2>
+    <ul>
+      <li>Livro de poesia</li>
+      <li>Flores decorativas</li>
+      <li>Perfume feminino</li>
+      <li>Bolsa elegante</li>
+      <li>Vouchers para experiências</li>
+      <li>Chocolate gourmet</li>
+      <li>Itens personalizados</li>
+    </ul>
+  </div>
 </div>
 
 <script>
@@ -315,7 +393,6 @@ setTimeout(() => {
   direita.style.animation = "abrirCartaDireita 5s ease-in-out forwards";
 }, 500);
 
-// Mostrar conteúdo após animação
 setTimeout(() => {
   document.getElementById('cartaContainer').style.display = 'none';
   document.getElementById('conteudo').style.opacity = 1;
@@ -330,6 +407,15 @@ for(let i=0;i<30;i++){
   p.style.animationDuration=(3+Math.random()*3)+'s';
   document.body.appendChild(p);
 }
+
+// Modal Lista de Presentes
+const modal = document.getElementById("lista-modal");
+const btn = document.getElementById("lista-btn");
+const fechar = document.querySelector("#lista-modal .fechar");
+
+btn.onclick = () => { modal.style.display = "flex"; }
+fechar.onclick = () => { modal.style.display = "none"; }
+window.onclick = (e) => { if(e.target === modal) modal.style.display = "none"; }
 </script>
 
 </body>
