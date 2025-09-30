@@ -58,7 +58,7 @@ body::before {
   100% { transform: translateY(-800px) translateX(50px); opacity:0; }
 }
 
-/* --- CARTA DUPLA LUXUOSA --- */
+/* --- CARTA DUPLA --- */
 #cartaContainer {
   position: fixed;
   top: 50%; left: 50%;
@@ -73,7 +73,7 @@ body::before {
   position: absolute;
   width: 50%;
   height: 100%;
-  background: linear-gradient(135deg, #FFD700, #E6C200); /* dourado quente */
+  background: linear-gradient(135deg, #FFD700, #E6C200); /* dourado estilo Bela e a Fera */
   border: 3px solid #B8860B;
   border-radius: 10px;
   box-shadow: 0 0 40px rgba(0,0,0,0.5);
@@ -85,31 +85,6 @@ body::before {
   font-size: 1.8em;
   color: #3e2f0b;
   backface-visibility: hidden;
-}
-
-/* Detalhes ornamentais dourados */
-.carta-lado::before, .carta-lado::after {
-  content: "";
-  position: absolute;
-  width: 60px; height: 60px;
-  border: 2px solid rgba(255,215,0,0.6);
-  border-radius: 50%;
-  top: 10px; right: 10px;
-  box-shadow: 0 0 15px rgba(255,215,0,0.4);
-  transform: rotate(45deg);
-}
-.carta-lado.direito::before { right: auto; left: 10px; }
-.carta-lado.direito::after { top: auto; bottom: 10px; left: 10px; }
-
-/* Brilhos animados */
-.carta-lado::after {
-  animation: brilho 2s infinite alternate;
-}
-
-@keyframes brilho {
-  0% { box-shadow: 0 0 10px rgba(255,215,0,0.4); }
-  50% { box-shadow: 0 0 25px rgba(255,215,0,0.8); }
-  100% { box-shadow: 0 0 10px rgba(255,215,0,0.4); }
 }
 
 .carta-lado.direito { 
@@ -256,23 +231,22 @@ footer {
   border-radius:12px;
   border:2px solid #f5d76e;
   display:inline-block;
-  box-shadow:0 0 20px rgba(245,215,110,0.6);
+  box-shadow: 0 0 20px rgba(245,215,110,0.6);
   max-width:95%;
-  word-wrap:break-word;
+  word-wrap: break-word;
 }
 
 /* --- RESPONSIVIDADE --- */
 @media(max-width:480px){
-  html, body { overflow-x:hidden; }
-  #cartaContainer { width:90%; height:auto; }
-  header h1 { font-size:1.6em; padding:6px 10px; }
-  header p { font-size:0.85em; padding:5px 8px; }
-  .tempo h2 { font-size:1.1em; }
-  .tempo { min-width:35px; padding:4px 6px; }
-  .info { width:95%; padding:12px; }
-  .btns a { font-size:0.8em; padding:5px 8px; }
-  #contador { padding:6px; gap:4px; }
-  footer { font-size:0.7em; padding:5px 6px; }
+  header h1{font-size:1.8em;padding:8px 12px;}
+  header h1 span:nth-child(2){font-size:1.2em;}
+  header p{font-size:0.9em;padding:6px 10px;}
+  .tempo h2{font-size:1.2em;}
+  .tempo{min-width:40px;padding:5px 8px;}
+  .info{width:95%;padding:15px;}
+  .btns a{font-size:0.85em;padding:6px 10px;}
+  #contador{padding:8px;gap:5px;}
+  footer{font-size:0.75em;padding:6px 8px;}
 }
 </style>
 </head>
@@ -287,18 +261,15 @@ footer {
 <!-- CONTEÚDO -->
 <div id="conteudo">
 <header>
-  <h1>
-    <span>Isadora</span>
-    <span>15 anos</span>
-  </h1>
-  <p>“Este é o dia que o Senhor fez; regozijemo-nos e alegremo-nos nele.” (Salmos 118:24)</p>
+<h1><span>Isadora</span><span>15 anos</span></h1>
+<p>“Este é o dia que o Senhor fez; regozijemo-nos e alegremo-nos nele.” (Salmos 118:24)</p>
 
-  <div id="contador">
-    <div class="tempo"><h2 id="dias">0</h2><span>Dias</span></div>
-    <div class="tempo"><h2 id="horas">0</h2><span>Horas</span></div>
-    <div class="tempo"><h2 id="minutos">0</h2><span>Min</span></div>
-    <div class="tempo"><h2 id="segundos">0</h2><span>Seg</span></div>
-  </div>
+<div id="contador">
+  <div class="tempo"><h2 id="dias">0</h2><span>Dias</span></div>
+  <div class="tempo"><h2 id="horas">0</h2><span>Horas</span></div>
+  <div class="tempo"><h2 id="minutos">0</h2><span>Min</span></div>
+  <div class="tempo"><h2 id="segundos">0</h2><span>Seg</span></div>
+</div>
 </header>
 
 <section class="info">
@@ -336,17 +307,19 @@ const atualizarContador = () => {
 };
 setInterval(atualizarContador, 1000);
 
-// Carta abertura lenta
-setTimeout(()=>{
-  document.querySelector('.carta-lado.esquerdo').style.animation="abrirCartaEsquerda 5s ease-in-out forwards";
-  document.querySelector('.carta-lado.direito').style.animation="abrirCartaDireita 5s ease-in-out forwards";
-},500);
+// Carta dupla: animação e revelar conteúdo
+const esquerda = document.querySelector('.carta-lado.esquerdo');
+const direita = document.querySelector('.carta-lado.direito');
+setTimeout(() => {
+  esquerda.style.animation = "abrirCartaEsquerda 5s ease-in-out forwards";
+  direita.style.animation = "abrirCartaDireita 5s ease-in-out forwards";
+}, 500);
 
-// Mostra conteúdo após animação
-setTimeout(()=>{
-  document.getElementById('cartaContainer').style.display='none';
-  document.getElementById('conteudo').style.opacity=1;
-},5500);
+// Mostrar conteúdo após animação
+setTimeout(() => {
+  document.getElementById('cartaContainer').style.display = 'none';
+  document.getElementById('conteudo').style.opacity = 1;
+}, 5500);
 
 // Partículas mágicas
 for(let i=0;i<30;i++){
