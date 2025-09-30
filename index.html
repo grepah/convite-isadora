@@ -232,7 +232,7 @@ header p {
 }
 #lista-btn:hover { transform: scale(1.05); box-shadow:0 6px 16px rgba(0,0,0,0.5); }
 
-/* --- MODAL LISTA PRESENTES --- */
+/* --- MODAL LISTA PRESENTES COM ANIMAÇÃO --- */
 #lista-modal {
   display: none;
   position: fixed;
@@ -242,6 +242,12 @@ header p {
   z-index: 20;
   justify-content: center;
   align-items: center;
+  animation: fadeIn 0.5s ease forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 #lista-modal .modal-content {
@@ -254,6 +260,13 @@ header p {
   overflow-y: auto;
   text-align: left;
   color: #3e2f0b;
+  transform: scale(0.7);
+  animation: zoomIn 0.5s ease forwards;
+}
+
+@keyframes zoomIn {
+  from { transform: scale(0.7); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
 }
 
 #lista-modal h2 {
@@ -413,7 +426,9 @@ const modal = document.getElementById("lista-modal");
 const btn = document.getElementById("lista-btn");
 const fechar = document.querySelector("#lista-modal .fechar");
 
-btn.onclick = () => { modal.style.display = "flex"; }
+btn.onclick = () => { 
+  modal.style.display = "flex"; 
+}
 fechar.onclick = () => { modal.style.display = "none"; }
 window.onclick = (e) => { if(e.target === modal) modal.style.display = "none"; }
 </script>
