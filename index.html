@@ -7,7 +7,7 @@
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500;700&display=swap');
 
-/* --- BODY E FUNDO ANIMADO --- */
+/* --- BODY --- */
 body {
   margin: 0;
   font-family: 'Poppins', sans-serif;
@@ -17,7 +17,6 @@ body {
   position: relative;
   min-height: 100vh;
   overflow-x: hidden;
-  overflow-y: auto;
 }
 
 /* Fundo animado */
@@ -36,6 +35,39 @@ body::before {
 @keyframes stars {
   from { background-position: 0 0; }
   to { background-position: 10000px 10000px; }
+}
+
+/* --- EFEITO CARTA --- */
+#carta {
+  position: fixed;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  width: 300px; height: 200px;
+  background: #f5d76e;
+  border-radius: 15px;
+  border: 3px solid #0d1b4c;
+  box-shadow: 0 0 25px rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  color: #0d1b4c;
+  font-family: 'Great Vibes', cursive;
+  font-size: 1.5em;
+  text-align: center;
+  animation: abrirCarta 2s ease forwards;
+}
+
+@keyframes abrirCarta {
+  0% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+  50% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+}
+
+/* --- ESCONDER CONTEÚDO ANTES --- */
+#conteudo {
+  opacity: 0;
+  transition: opacity 1s ease;
 }
 
 /* --- HEADER --- */
@@ -148,9 +180,6 @@ header p {
 }
 
 .btns a {
-  display: flex;
-  align-items: center;
-  gap: 6px;
   background: #f5d76e;
   color: #0d1b4c;
   padding: 8px 14px;
@@ -158,13 +187,13 @@ header p {
   text-decoration: none;
   font-size: 0.95em;
   font-weight: 600;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
   transition: transform 0.3s, box-shadow 0.3s;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
 }
 
-.btns a img {
-  width: 24px;
-  height: 24px;
+.btns a:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.5);
 }
 
 /* --- RODAPÉ --- */
@@ -172,6 +201,8 @@ footer {
   margin: 20px 0 20px;
   font-size: 0.8em;
   color: #fff5cc;
+  position: relative;
+  z-index: 1;
   background: rgba(13,27,76,0.92);
   padding: 8px 15px;
   border-radius: 12px;
@@ -196,6 +227,12 @@ footer {
 </style>
 </head>
 <body>
+
+<!-- CARTA ANIMADA -->
+<div id="carta">Uma mensagem especial para você…</div>
+
+<!-- CONTEÚDO DO CONVITE -->
+<div id="conteudo">
 <header>
 <h1>15 Anos Isadora</h1>
 <p>“Este é o dia que o Senhor fez; regozijemo-nos e alegremo-nos nele.” (Salmos 118:24)</p>
@@ -213,40 +250,40 @@ footer {
 <p><strong>Data:</strong> 23/01</p>
 <p><strong>Horário:</strong> 21h até 4h</p>
 <div class="btns">
-  <a href="https://wa.me/5551993223902" target="_blank">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp"> Confirmar Presença
-  </a>
-  <a href="https://maps.app.goo.gl/YbAJr3sXhotr2sFw5" target="_blank">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/e/ec/Google_Maps_icon_%282020%29.svg" alt="Maps"> Como Chegar
-  </a>
+  <a href="https://wa.me/5551993223902" target="_blank">Confirmar Presença</a>
+  <a href="https://maps.app.goo.gl/YbAJr3sXhotr2sFw5" target="_blank">Como Chegar</a>
 </div>
 </section>
 
 <footer>
 ✨ Feito com carinho para a Isadora ✨
 </footer>
+</div>
 
 <script>
+// Contador
 const dataEvento = new Date("January 23, 2026 21:00:00").getTime();
-
 const atualizarContador = () => {
   const agora = new Date().getTime();
   const distancia = dataEvento - agora;
-
   if(distancia < 0) return;
-
   const dias = Math.floor(distancia / (1000*60*60*24));
   const horas = Math.floor((distancia % (1000*60*60*24)) / (1000*60*60));
   const minutos = Math.floor((distancia % (1000*60*60)) / (1000*60));
   const segundos = Math.floor((distancia % (1000*60)) / 1000);
-
   document.getElementById("dias").textContent = dias;
   document.getElementById("horas").textContent = horas;
   document.getElementById("minutos").textContent = minutos;
   document.getElementById("segundos").textContent = segundos;
 };
-
 setInterval(atualizarContador, 1000);
+
+// Efeito carta
+setTimeout(() => {
+  document.getElementById('carta').style.display = 'none';
+  document.getElementById('conteudo').style.opacity = 1;
+}, 3000); // 3 segundos mostrando a carta
 </script>
+
 </body>
 </html>
